@@ -3,21 +3,18 @@ class Solution:
         jumps = len(words[0])
         wordLen = jumps * len(words)
 
+        if len(s) < wordLen:
+            return []
         count1 = Counter(words)
         res = []
 
-        for i in range(0, len(s)):
+        for i in range(len(s) - wordLen + 1):
             substring = s[i:i + wordLen]
             count2 = Counter()
             for j in range(0, len(substring), jumps):
                 word = substring[j: j + jumps]
-                if word in count1 and word not in count2:
-                    count2[word] = 1
-                elif word in count1.keys():
-                    count2[word] +=1
-                else:
-                    print('breaking')
-                    break
+                count2[word] +=1
+        
             if count1 == count2:
                 res.append(i)
         return res
