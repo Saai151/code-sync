@@ -1,13 +1,12 @@
 class Solution:
     def beautifulIndices(self, s: str, a: str, b: str, k: int) -> List[int]:
 
-        result = set()
-        
+        result = []
         len1 = len(a)
         len2 = len(b)
 
-        potential_i = []
-        potential_j = []
+        indexA = []
+        indexB = []
 
 
         for i in range(len(s)):
@@ -15,16 +14,19 @@ class Solution:
             substring_b = s[i: i + len2]
             
             if substring_a == a:
-                potential_i.append(i)
+                indexA.append(i)
             if substring_b == b:
-                potential_j.append(i)
-        
-        print(potential_i)
-        print(potential_j)
+                indexB.append(i)
 
-        for i in potential_i:
-            for j in potential_j:
-                if abs(i - j) <= k:
-                    result.add(i)
-                    break
-        return sorted(list(result))
+        print(indexA)
+        print(indexB)
+        j = 0
+        for i in indexA:
+            while (j < len(indexB) and indexB[j] < i - k):
+                j +=1
+
+            if (j < len(indexB) and indexB[j] <= k + i):
+                result.append(i)
+            
+        
+        return result
