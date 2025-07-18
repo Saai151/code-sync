@@ -12,22 +12,23 @@ class Solution:
 
         oldToNew = {}
 
-        def dfs(node):
-            if not node:
-                return None
+        def bfs(node):
 
-            stack = [node]
+            if not node: return None
+
+            q = collections.deque()
             oldToNew[node] = Node(node.val)
 
-            while stack:
-                curr = stack.pop()
+            q.append(node)
+
+            while q:
+                curr = q.popleft()
+
                 for n in curr.neighbors:
                     if n not in oldToNew:
                         oldToNew[n] = Node(n.val)
-                        stack.append(n)
+                        q.append(n)
 
                     oldToNew[curr].neighbors.append(oldToNew[n])
             return oldToNew[node]
-        
-        
-        return dfs(node)
+        return bfs(node)
