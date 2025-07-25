@@ -7,9 +7,9 @@
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
 
-        #Basically do BFS
         q = collections.deque()
         q.append(root)
+
         res = []
 
         while q:
@@ -22,7 +22,7 @@ class Solution:
                     level.append(curr.val)
                     q.append(curr.left)
                     q.append(curr.right)
+                
             if level:
                 res.append(level)
-        
         return res
