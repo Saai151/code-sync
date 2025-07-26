@@ -6,19 +6,17 @@
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        heap = []
-        heapq.heapify(heap)
+        n = 0
+        stack = []
+        curr = root
 
-        q = collections.deque()
-        q.append(root)
-        while q:
-            curr = q.popleft()
-            if curr:
-                heapq.heappush(heap, curr.val)
-                q.append(curr.left)
-                q.append(curr.right)
-        val = 0
-        for i in range(k):
-            val = heapq.heappop(heap)
-        
-        return val
+        while curr or stack:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            curr = stack.pop()
+            k-=1
+            if k == 0:
+                return curr.val
+            curr = curr.right
+        return
