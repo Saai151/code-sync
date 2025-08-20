@@ -6,7 +6,7 @@ class ListNode:
 
 class MyHashMap:
     def __init__(self):
-        self.arr = [ListNode()] * 1000
+        self.arr = [ListNode() for _ in range(1000)] 
         
 
     def put(self, key: int, value: int) -> None:
